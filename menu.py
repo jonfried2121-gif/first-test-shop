@@ -2,7 +2,8 @@ import logging
 
 def menu():
     print("======= ORDER MENU =======")
-    print("""1.Create order
+    print("""
+    1.Create order
     2. Show all orders
     3. Find order by id
     4. Close order
@@ -13,3 +14,4 @@ def menu():
             pick = int(input("Choose option"))
         except ValueError:
             print("please enter a number")
+menu()
