@@ -13,25 +13,25 @@ def in_stock(id):
             return True
     return
 
-def push_new_order(id,item_id,quantity):
-    order ={"id":id,"items":[{"product_id":item_id,"quantity":quantity}],"total":calculate_total_with_discount(item_id,quantity),"status":"open"}
+def push_new_order(id,item_list):
+    order ={"id":id,"items":item_list,"total":calculate_total_with_discount(item_list) * discount_manager(calculate_total_with_discount(item_list)),"status":"open"}
     all_orders = read_json()
     all_orders.append(order)
     write_to_json(all_orders)
     return
 
-def calculate_regular_price(item_id,quantity):
-     for item in products:
-            if item["id"] == item_id:
-                return item["price"] * quantity
+
+     
 
     
-def calculate_total_with_discount(item_id,quantity):
-    for item in products:
-        if item["id"] == item_id:
-            befor_discount = item["price"] * quantity
-            finall_price = befor_discount*discount_manager(befor_discount)
-            return finall_price
+def calculate_total_with_discount(item_list):
+    total_price = 0
+    for item in item_list:
+        for product in products:
+            if item["product_id"] ==product["id"]:
+                total_price += product["price"] * item["quantity"]
+    return total_price
+
 
 def discount_manager(price):
     if price < 300:
@@ -74,12 +74,58 @@ def change_to_close(id):
             return "error: cant change from close to open"
     return"no such order"
 
-def add_item_to_order(order_id,item_id,quantity):
+def change_quantity(order_id,product_id,new_quantity):
     all_orders = read_json()
     for order in all_orders:
-        if order["id"] ==            
+        if order["id"] == order_id:
+            if order["status"] == "open":
+                product_list = order["items"]
+                for product in product_list:
+                    
+                    if product["product_id"] == product_id:
+                        product["quantity"] += new_quantity
+                order["total"] = calculate_total_with_discount(order["items"]) * discount_manager(calculate_total_with_discount(order["items"]))
+                write_to_json(all_orders)
+                return "changes done"
+            return 
+        
+def number_of_orders():
+    all_orders = read_json()
+    return len(all_orders)
+
+def expensive_order():
+    expensive = sorted_orders()
+    return expensive[0]
+
+def top_three_orders():
+    orders = sorted_orders()
+    return orders[0:3]
+
+
+def sorted_orders():
+    all_orders = read_json()
+    orders_list_sorted = sorted(all_orders, key= lambda k:(k["total"]))
+    return orders_list_sorted
+
+def print_order(order:dict):
+    for key,val in order.items():
+        if isinstance(val,list):
+            for product in val:
+                print(f"product id: {product["product_id"]},quantity: {product["quantity"]}")
+        else:
+            print(key, val)
+    return
+
+def print_orders(orders:list):
+    for order in orders:
+        print_order(order)
+    return
+
+
+                
+
         
 
 
 if __name__ == "__main__":
-    print(change_to_close(9))
+    print(expensive_order())

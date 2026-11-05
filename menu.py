@@ -1,5 +1,5 @@
 import logging
-
+from input import start_order,show_all_orders,search_by_id,change_status,report
 def menu():
     print("======= ORDER MENU =======")
     print("""
@@ -14,4 +14,17 @@ def menu():
             pick = int(input("Choose option"))
         except ValueError:
             print("please enter a number")
+        if pick == 1:
+            start_order()
+        if pick == 2:
+            show_all_orders()
+        if pick == 3:
+            search_by_id()
+        if pick == 4:
+            change_status()
+        if pick == 5:
+            report()
+        if pick == 0:
+            break
+
 menu()

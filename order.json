@@ -9,5 +9,27 @@
     ],
     "total": 342.0,
     "status": "closed"
+  },
+  {
+    "id": 10,
+    "items": [
+      {
+        "product_id": 3,
+        "quantity": 2
+      }
+    ],
+    "total": 1530.0,
+    "status": "open"
+  },
+  {
+    "id": 11,
+    "items": [
+      {
+        "product_id": 1,
+        "quantity": 3
+      }
+    ],
+    "total": 342.0,
+    "status": "open"
   }
 ]
