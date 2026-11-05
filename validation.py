@@ -13,6 +13,6 @@ def check_quantity():
     return quantity
 
 def check_product_id():
-    product_id = input("enter product id storage")
+    product_id = input("enter id storage")
     product_id = valid_number(product_id)
     return product_id

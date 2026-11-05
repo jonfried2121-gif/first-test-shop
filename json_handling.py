@@ -17,7 +17,7 @@ def push_new_order(id,item_id,quantity):
     order ={"id":id,"items":[{"product_id":item_id,"quantity":quantity}],"total":calculate_total_with_discount(item_id,quantity),"status":"open"}
     all_orders = read_json()
     all_orders.append(order)
-    write_to_json(order)
+    write_to_json(all_orders)
     return
 
 def calculate_regular_price(item_id,quantity):
@@ -55,5 +55,31 @@ def write_to_json(text):
 def percent_calculator(price):
     return 100 -(discount_manager(price) *100)
 
+def search_json(id):
+    all_orders = read_json()
+    for order in all_orders:
+        if order["id"] == id:
+            return order
+    return "no such order"
+
+def change_to_close(id):
+    all_orders = read_json()
+    for order in all_orders:
+        if order["id"] == id:
+            if order["status"] == "open":
+                order["status"] = "closed"
+                print(order)
+                write_to_json(all_orders)
+                return "done"
+            return "error: cant change from close to open"
+    return"no such order"
+
+def add_item_to_order(order_id,item_id,quantity):
+    all_orders = read_json()
+    for order in all_orders:
+        if order["id"] ==            
+        
+
+
 if __name__ == "__main__":
-    print(next_id())
+    print(change_to_close(9))

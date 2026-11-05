@@ -1,11 +1,13 @@
-{
-  "id": 9,
-  "items": [
-    {
-      "product_id": 1,
-      "quantity": 3
-    }
-  ],
-  "total": 342.0,
-  "status": "open"
-}
+[
+  {
+    "id": 9,
+    "items": [
+      {
+        "product_id": 1,
+        "quantity": 3
+      }
+    ],
+    "total": 342.0,
+    "status": "closed"
+  }
+]
